@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanda Search Dork | Cyber Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-cyan: #22d3ee;
+            --neon-fuchsia: #d946ef;
+            --dark-bg: #020617;
+        }
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--dark-bg);
+            color: var(--neon-cyan);
+            overflow-x: hidden;
+            margin: 0;
+        }
+        .cyber-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 100;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(34, 211, 238, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+            position: fixed;
+            bottom: 100%;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+        .vanda-bg {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(90deg, var(--dark-bg) 30%, transparent 100%), 
+                              url('https://images.unsplash.com/photo-1614728263952-84ea206f99b6?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+            filter: grayscale(100%) contrast(120%);
+            transition: opacity 0.5s ease;
+        }
+        .glitch-active .vanda-bg {
+            filter: grayscale(0%) hue-rotate(180deg) contrast(150%);
+            opacity: 0.3;
+        }
+        .hud-border {
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            position: relative;
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(10px);
+        }
+        .hud-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px;
+            width: 10px; height: 10px;
+            border-top: 2px solid var(--neon-fuchsia);
+            border-left: 2px solid var(--neon-fuchsia);
+        }
+        .hud-border::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; right: -2px;
+            width: 10px; height: 10px;
+            border-bottom: 2px solid var(--neon-cyan);
+            border-right: 2px solid var(--neon-cyan);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.95; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "@google/genai": "https://esm.sh/@google/genai@^1.39.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="vanda-bg" id="vandaBackground"></div>
+    <div class="scanline"></div>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
